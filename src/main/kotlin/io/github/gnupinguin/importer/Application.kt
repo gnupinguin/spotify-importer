@@ -1,4 +1,4 @@
-package io.github.gnupinguin.spotify
+package io.github.gnupinguin.importer
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
