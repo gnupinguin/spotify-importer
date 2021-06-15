@@ -36,3 +36,9 @@ out/
 ### VS Code ###
 .vscode/
 
+
+# Ignore Gradle build output directory
+build
+
+#ignore secret properties
+src/main/resources/application-local.yml
