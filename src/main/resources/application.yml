@@ -6,7 +6,7 @@ spring:
       client:
         registration:
           spotify:
-            client-id: "39b4752f8ec2426ca9fc263767535758"
+            client-id: "SPOTIFY_APP_ID"
             client-secret: "YOUR_SECRET_VALUE"
             client-name: "Spotify client"
             scope:

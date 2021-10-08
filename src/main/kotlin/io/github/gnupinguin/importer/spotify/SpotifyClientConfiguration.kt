@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService
 import java.util.concurrent.TimeUnit
 
-class SpotifyClientConfiguration(private val spotifyDataProvider: SpotifyDataProvider) {
+class SpotifyClientConfiguration(private val spotifySecurityContext: SpotifySecurityContext) {
 
     private fun feignLoggerLevel(): Logger.Level {
         return Logger.Level.FULL
@@ -26,7 +26,7 @@ class SpotifyClientConfiguration(private val spotifyDataProvider: SpotifyDataPro
     }
 
     private fun authRequestInterceptor(): RequestInterceptor {
-        return AuthorizationHeaderInterceptor { "Bearer ${spotifyDataProvider.getAccessToken()}" }
+        return AuthorizationHeaderInterceptor { "Bearer ${spotifySecurityContext.getAccessToken()}" }
     }
 
     @Bean
@@ -49,7 +49,6 @@ class SpotifyClientConfiguration(private val spotifyDataProvider: SpotifyDataPro
     }
 
 }
-
 
 class AuthorizationHeaderInterceptor(private val headerValueProvider: () -> String): RequestInterceptor {
     override fun apply(template: RequestTemplate?) {

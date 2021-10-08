@@ -1,24 +1,39 @@
 package io.github.gnupinguin.importer.web.rest
 
-import io.github.gnupinguin.importer.client.SpotifyMigrator
+import io.github.gnupinguin.importer.client.SpotifyService
 import io.github.gnupinguin.importer.client.UserTracksLoader
-import org.springframework.http.HttpRequest
+import io.github.gnupinguin.importer.spotify.SpotifyTrack
 import org.springframework.http.MediaType
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.security.oauth2.core.user.OAuth2User
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
-@RestController("/api")
+@CrossOrigin
+@RestController
+@RequestMapping("/api")
 class ImportEndpoint(private val userTracksLoader: UserTracksLoader,
-                     private val spotifyMigrator: SpotifyMigrator
-) {
+                     private val spotifyService: SpotifyService) {
 
-    @PostMapping(value = ["import"], consumes = [MediaType.MULTIPART_FORM_DATA_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun importFromFile(@RequestParam("file") file: MultipartFile, request: HttpRequest) {
-        val userTracks = userTracksLoader.loadTracks(file.bytes)
-        val spotifyTracks = spotifyMigrator.searchTracks(userTracks)
-        spotifyMigrator.addToSpotify(spotifyTracks)
+    @PostMapping(value = ["import"])
+    fun importFromFile(@RequestParam("file") file: MultipartFile) {
+        val userTracks = userTracksLoader.loadTracks(file)
+        val spotifyTracks = spotifyService.searchTracks(userTracks)
+        spotifyService.addToSpotify(spotifyTracks)
+    }
+
+    //TODO unlogin periodically happens
+    @PostMapping("search", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun searchSongs(@RequestParam("file") file: MultipartFile): List<SpotifyTrack> {
+        val userTracks = userTracksLoader.loadTracks(file)
+        return spotifyService.searchTracks(userTracks)
+    }
+
+    @GetMapping("user")
+    fun getUser(@AuthenticationPrincipal principal: OAuth2User): Map<String, String> {
+        return mapOf(
+            "name" to principal.attributes["display_name"].toString()
+        )
     }
 
 }

@@ -3,19 +3,19 @@ package io.github.gnupinguin.importer.client
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.springframework.stereotype.Component
-import java.io.File
+import org.springframework.web.multipart.MultipartFile
 
 interface UserTracksLoader {
 
-    fun loadTracks(file: ByteArray): List<UserTrack>
+    fun loadTracks(file: MultipartFile): List<UserTrack>
 
 }
 
 @Component
 class UserTracksLoaderImpl(private val objectMapper: ObjectMapper) : UserTracksLoader {
 
-    override fun loadTracks(file: ByteArray): List<UserTrack> {
-        return objectMapper.readValue(file)
+    override fun loadTracks(file: MultipartFile): List<UserTrack> {
+        return objectMapper.readValue(file.bytes)
     }
 
 }

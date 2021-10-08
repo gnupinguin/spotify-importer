@@ -3,9 +3,8 @@ package io.github.gnupinguin.importer.client
 import io.github.gnupinguin.importer.spotify.SpotifyClient
 import io.github.gnupinguin.importer.spotify.SpotifyTrack
 import org.springframework.stereotype.Component
-import java.util.concurrent.TimeUnit
 
-interface SpotifyMigrator {
+interface SpotifyService {
 
     fun searchTracks(tracks: List<UserTrack>) : List<SpotifyTrack>
 
@@ -14,7 +13,7 @@ interface SpotifyMigrator {
 }
 
 @Component
-class SpotifyMigratorImpl(private val spotifyClient: SpotifyClient) : SpotifyMigrator {
+class SpotifyServiceImpl(private val spotifyClient: SpotifyClient) : SpotifyService {
 
     override fun addToSpotify(tracks: List<SpotifyTrack>) {
         val ids = tracks.map { it.id }
