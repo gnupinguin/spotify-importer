@@ -2,6 +2,7 @@ package io.github.gnupinguin.importer.client
 
 import io.github.gnupinguin.importer.spotify.SpotifyClient
 import io.github.gnupinguin.importer.spotify.SpotifyTrack
+import io.github.gnupinguin.importer.spotify.TrackObject
 import org.springframework.stereotype.Component
 
 interface SpotifyService {
@@ -9,6 +10,8 @@ interface SpotifyService {
     fun searchTracks(tracks: List<UserTrack>) : List<SpotifyTrack>
 
     fun addToSpotify(tracks: List<SpotifyTrack>)
+
+    fun getSavedTracks(): List<TrackObject>
 
 }
 
@@ -30,6 +33,20 @@ class SpotifyServiceImpl(private val spotifyClient: SpotifyClient) : SpotifyServ
                 null
             }
         }
+    }
+
+    //TODO add cache (should add user parameter or cache by oauth context)
+    override fun getSavedTracks(): List<TrackObject> {
+        return generateSequence(spotifyClient.likedSongs()) {
+            if (it.next != null) {
+                spotifyClient.likedSongs(it.offset + 50, 50)
+            } else {
+                null
+            }
+        }
+            .flatMap { it.items }
+            .map { it.track }
+            .toList()
     }
 
     private fun createSearchQuery(userTrack: UserTrack): String =

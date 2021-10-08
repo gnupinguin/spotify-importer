@@ -17,10 +17,11 @@ interface SpotifyClient {
     fun search(@RequestParam("q") q: String,
                @RequestParam("type") type: String = "track") : SpotifyTracksResponse
 
-    @GetMapping(path = ["users/{userId}/playlists"], consumes = [MediaType.APPLICATION_JSON_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun playlists(@PathVariable("userId") id: String) : Map<String, Any>
-
     @PutMapping(path = ["me/tracks"], consumes = [MediaType.APPLICATION_JSON_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun addToLiked(@RequestParam("ids") ids: List<String>)
+
+    @GetMapping(path = ["me/tracks"], consumes = [MediaType.APPLICATION_JSON_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun likedSongs(@RequestParam("offset") offset: Int = 0,
+                   @RequestParam("limit") limit: Int = 50): PagingObject<SavedTrackObject>
 
 }
