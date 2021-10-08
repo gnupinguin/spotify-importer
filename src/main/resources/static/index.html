@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spotify Importer</title>
+    <script src="https://code.jquery.com/jquery-1.8.3.js"></script>
+</head>
+<body>
+<div>
+    Login with Spotify: <a href="/oauth2/authorization/spotify">click here</a>
+</div>
+<div>
+    Logged in as: <span id="user"></span>
+</div>
+
+<div>
+    Start import: <a href="/import">click here</a>
+</div>
+
+<script type="text/javascript">
+    $.get("/api/user", function(data) {
+        $("#user").html(data.name);
+    });
+</script>
+</body>
+</html>

@@ -6,7 +6,7 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken
 import org.springframework.stereotype.Component
 
-interface SpotifyDataProvider {
+interface SpotifySecurityContext {
 
     fun getAccessToken(): String
 
@@ -15,7 +15,7 @@ interface SpotifyDataProvider {
 }
 
 @Component
-class SpotifyDataProviderImpl(private val clientService: OAuth2AuthorizedClientService) : SpotifyDataProvider {
+class SpotifySecurityContextImpl(private val clientService: OAuth2AuthorizedClientService) : SpotifySecurityContext {
 
     override fun getAccessToken(): String {
         return getClient().accessToken.tokenValue
