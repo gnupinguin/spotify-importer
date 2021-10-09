@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Spotify Importer</title>
+    <title>Spotify Tools</title>
     <script src="https://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
+    <script src="js/index.js"></script>
 </head>
 <body>
 <div>
@@ -11,11 +13,20 @@
 </div>
 <div>
     Logged in as: <span id="user"></span>
+    <div>
+        <button id="logoutButton">Logout</button>
+    </div>
+</div>
+
+
+<div>
+    Import tracks: <a href="/import">click here</a>
 </div>
 
 <div>
-    Start import: <a href="/import">click here</a>
+    Created artist playlist from saved songs: <a href="/saved-artists">click here</a>
 </div>
+
 
 <script type="text/javascript">
     $.get("/api/user", function(data) {

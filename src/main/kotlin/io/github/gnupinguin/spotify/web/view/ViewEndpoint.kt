@@ -1,10 +1,9 @@
-package io.github.gnupinguin.importer.web.view
+package io.github.gnupinguin.spotify.web.view
 
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseBody
 
 @Controller
 @RequestMapping
@@ -16,8 +15,13 @@ class ViewEndpoint {
     }
 
     @GetMapping(value = ["import"], produces = [MediaType.TEXT_HTML_VALUE])
-    fun result(): String {
+    fun importSongs(): String {
         return "import.html"
+    }
+
+    @GetMapping(value = ["saved-artists"], produces = [MediaType.TEXT_HTML_VALUE])
+    fun playlist(): String {
+        return "playlist.html"
     }
 
 }

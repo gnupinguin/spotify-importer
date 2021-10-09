@@ -1,20 +1,19 @@
-package io.github.gnupinguin.importer
+package io.github.gnupinguin.spotify
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.boot.runApplication
+import org.springframework.cache.annotation.EnableCaching
 import org.springframework.cloud.openfeign.EnableFeignClients
-import org.springframework.http.HttpStatus
-import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
-import org.springframework.security.config.annotation.web.configurers.ExceptionHandlingConfigurer
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry
-import org.springframework.security.web.authentication.HttpStatusEntryPoint
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository
 
 
+@EnableCaching
 @EnableFeignClients
+@ConfigurationPropertiesScan
 @SpringBootApplication
 class Application
 
@@ -29,14 +28,11 @@ class OAuth2LoginSecurityConfig: WebSecurityConfigurerAdapter() {
                 http.authorizeRequests { a ->
                         a.antMatchers("/", "/error").permitAll()
                                 .anyRequest().authenticated()
-                }
-//                        .exceptionHandling { e ->
-//                        e.authenticationEntryPoint(HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
-//                }
-                .csrf{c ->
+                }.csrf { c ->
                         c.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                }
-                        .oauth2Login()
+                }.logout { l ->
+                        l.logoutSuccessUrl("/").permitAll()
+                }.oauth2Login()
 
         }
 }

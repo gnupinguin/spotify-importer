@@ -1,4 +1,4 @@
-package io.github.gnupinguin.importer.client
+package io.github.gnupinguin.spotify.service.importer
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
@@ -19,3 +19,5 @@ class UserTracksLoaderImpl(private val objectMapper: ObjectMapper) : UserTracksL
     }
 
 }
+
+data class UserTrack(val band: String, val song: String)

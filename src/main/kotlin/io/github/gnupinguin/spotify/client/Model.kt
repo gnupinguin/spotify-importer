@@ -1,4 +1,4 @@
-package io.github.gnupinguin.importer.spotify
+package io.github.gnupinguin.spotify.client
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.util.*
@@ -19,7 +19,8 @@ data class PagingObject<T>(val href: String,
                            val total: Int)
 
 data class SavedTrackObject(@JsonProperty("added_at") val addedAt: Date,
-                            val track: TrackObject)
+                            val track: TrackObject
+)
 
 data class TrackObject(val album: SimplifiedAlbumObject,
                        val artists: List<ArtistObject>,
@@ -31,3 +32,11 @@ data class SimplifiedAlbumObject(val id: String,
 
 data class ArtistObject(val id: String,
                         val name: String)
+
+data class CreatePlaylistRequest(val name: String, val description: String?)
+
+data class PlaylistObject(val id: String, val name: String, val description: String?)
+
+data class AddItemsToPlaylistRequest(val uris: List<String>, val position: Int? = null)
+
+data class SnapshotObject(@JsonProperty("snapshot_id") val snapshotId: String)

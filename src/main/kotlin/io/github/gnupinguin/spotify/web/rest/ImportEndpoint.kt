@@ -1,16 +1,14 @@
-package io.github.gnupinguin.importer.web.rest
+package io.github.gnupinguin.spotify.web.rest
 
-import io.github.gnupinguin.importer.client.SpotifyService
-import io.github.gnupinguin.importer.client.UserTracksLoader
-import io.github.gnupinguin.importer.spotify.SpotifyTrack
-import io.github.gnupinguin.importer.spotify.TrackObject
+import io.github.gnupinguin.spotify.client.SpotifyService
+import io.github.gnupinguin.spotify.client.SpotifyTrack
+import io.github.gnupinguin.spotify.service.importer.UserTracksLoader
 import org.springframework.http.MediaType
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
-@CrossOrigin
 @RestController
 @RequestMapping("/api")
 class ImportEndpoint(private val userTracksLoader: UserTracksLoader,
@@ -37,11 +35,5 @@ class ImportEndpoint(private val userTracksLoader: UserTracksLoader,
         )
     }
 
-    @GetMapping("saved-artists")
-    fun getSaved(): Map<String, List<TrackObject>> {
-        return spotifyService.getSavedTracks()
-            .flatMap { track -> track.artists.map { artist -> artist.name to track } }
-            .groupBy({ p -> p.first }, { p -> p.second }).toMap()
-    }
 
 }

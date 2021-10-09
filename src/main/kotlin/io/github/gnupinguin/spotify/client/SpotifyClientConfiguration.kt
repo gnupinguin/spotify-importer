@@ -1,4 +1,4 @@
-package io.github.gnupinguin.importer.spotify
+package io.github.gnupinguin.spotify.client
 
 import feign.*
 import feign.codec.Decoder
