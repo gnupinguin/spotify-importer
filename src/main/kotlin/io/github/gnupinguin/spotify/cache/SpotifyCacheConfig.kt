@@ -1,7 +1,7 @@
 package io.github.gnupinguin.spotify.cache;
 
 import com.github.benmanes.caffeine.cache.Caffeine
-import io.github.gnupinguin.spotify.client.SpotifySecurityContext
+import io.github.gnupinguin.spotify.service.SpotifySecurityContext
 import org.springframework.cache.CacheManager
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.caffeine.CaffeineCacheManager

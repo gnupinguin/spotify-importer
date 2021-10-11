@@ -3,6 +3,7 @@ package io.github.gnupinguin.spotify.client
 import io.github.gnupinguin.spotify.cache.CacheName
 import io.github.gnupinguin.spotify.cache.SpotifyCacheConfig.Companion.SPOTIFY_CACHE_MANAGER
 import io.github.gnupinguin.spotify.cache.SpotifyCacheConfig.Companion.SPOTIFY_KEY_GENERATOR
+import io.github.gnupinguin.spotify.service.PagingUtils
 import org.springframework.cache.annotation.CacheConfig
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.cloud.openfeign.FeignClient

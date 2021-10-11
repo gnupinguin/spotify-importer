@@ -1,6 +1,6 @@
 package io.github.gnupinguin.spotify.web.rest
 
-import io.github.gnupinguin.spotify.client.SpotifyService
+import io.github.gnupinguin.spotify.service.SpotifyService
 import io.github.gnupinguin.spotify.client.SpotifyTrack
 import io.github.gnupinguin.spotify.service.importer.UserTracksLoader
 import org.springframework.http.MediaType
@@ -12,7 +12,8 @@ import org.springframework.web.multipart.MultipartFile
 @RestController
 @RequestMapping("/api")
 class ImportEndpoint(private val userTracksLoader: UserTracksLoader,
-                     private val spotifyService: SpotifyService) {
+                     private val spotifyService: SpotifyService
+) {
 
     @PostMapping(value = ["import"])
     fun importFromFile(@RequestParam("file") file: MultipartFile) {

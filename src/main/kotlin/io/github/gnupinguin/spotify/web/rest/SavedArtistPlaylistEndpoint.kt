@@ -1,6 +1,6 @@
 package io.github.gnupinguin.spotify.web.rest
 
-import io.github.gnupinguin.spotify.client.SpotifyService
+import io.github.gnupinguin.spotify.service.SpotifyService
 import io.github.gnupinguin.spotify.client.TrackObject
 import org.springframework.web.bind.annotation.*
 

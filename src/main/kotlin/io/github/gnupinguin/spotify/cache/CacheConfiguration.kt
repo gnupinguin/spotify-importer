@@ -1,4 +1,4 @@
-package io.github.gnupinguin.spotify.cache;
+package io.github.gnupinguin.spotify.cache
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding

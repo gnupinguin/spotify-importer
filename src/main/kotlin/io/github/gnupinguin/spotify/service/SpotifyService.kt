@@ -1,6 +1,7 @@
-package io.github.gnupinguin.spotify.client
+package io.github.gnupinguin.spotify.service
 
-import io.github.gnupinguin.spotify.client.PagingUtils.Companion.MAX_PAGING_STEP
+import io.github.gnupinguin.spotify.client.*
+import io.github.gnupinguin.spotify.service.PagingUtils.Companion.MAX_PAGING_STEP
 import io.github.gnupinguin.spotify.service.importer.UserTrack
 import org.springframework.stereotype.Component
 

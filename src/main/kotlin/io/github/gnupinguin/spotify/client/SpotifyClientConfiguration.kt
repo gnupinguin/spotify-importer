@@ -6,6 +6,7 @@ import feign.codec.Encoder
 import feign.httpclient.ApacheHttpClient
 import feign.jackson.JacksonDecoder
 import feign.jackson.JacksonEncoder
+import io.github.gnupinguin.spotify.service.SpotifySecurityContext
 import org.apache.http.impl.client.HttpClientBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService

@@ -1,4 +1,4 @@
-package io.github.gnupinguin.spotify.client
+package io.github.gnupinguin.spotify.service
 
 class PagingUtils {
     companion object {
